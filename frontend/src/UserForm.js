@@ -1,4 +1,6 @@
-import { Input, Dropdown } from 'semantic-ui-react';
+import { Input, Dropdown, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function UserForm() {
   const options = [
@@ -37,14 +39,38 @@ export default function UserForm() {
     { key: 'HST 318', text: 'HST 318', value: 'HST 318' },
     { key: 'SER 402', text: 'SER 402', value: 'SER 402' }
   ];
+
+  const [state, setState] = useState({ prevCourses: [], mathSkill: 3, serSkill: 3, csSkill: 3});
+  function onCoursesChange(event, data) {
+    setState({ ...state, prevCourses: data.value });
+  }
+  function onSkillChange(event, data) {
+    const stateProperties = {
+      'math-skill': 'mathSkill',
+      'ser-skill': 'serSkill',
+      'cs-skill': 'csSkill'
+    };
+    setState({ ...state, [stateProperties[data.name]]: data.value });
+  }
+
+  const recommendationParams = new URLSearchParams();
+  // console.debug(state.prevCourses);
+  for (let course of state.prevCourses) {
+    recommendationParams.append('prevCourses', course);
+  }
+  for (let skill of ['mathSkill', 'serSkill', 'csSkill']) {
+    recommendationParams.append(skill, state[skill]);
+  }
+
   return (<>
     <Input placeholder='Your name...' />
-    <Dropdown placeholder='Courses...' fluid multiple selection options={options} />
-    <Input type='range' min={1} max={5} name='math-skill' />
-    <label for='math-skill'>Math</label>
-    <Input type='range' min={1} max={5} name='ser-skill' />
-    <label for='ser-skill'>SER</label>
-    <Input type='range' min={1} max={5} name='math-skill' />
-    <label for='cs-skill'>CS</label>
+    <Dropdown placeholder='Courses...' fluid multiple selection options={options} onChange={onCoursesChange} />
+    <Input type='range' min={1} max={5} name='math-skill' onChange={onSkillChange}/>
+    <label htmlFor='math-skill'>Math</label>
+    <Input type='range' min={1} max={5} name='ser-skill'  onChange={onSkillChange}/>
+    <label htmlFor='ser-skill'>SER</label>
+    <Input type='range' min={1} max={5} name='cs-skill'  onChange={onSkillChange}/>
+    <label htmlFor='cs-skill'>CS</label>
+    <Button><Link to={`/recommendations?${recommendationParams.toString()}`}>Get recommended courses</Link></Button>
   </>);
 }
