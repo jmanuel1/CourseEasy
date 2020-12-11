@@ -8,6 +8,7 @@ import {
   Link
 } from "react-router-dom";
 import UserForm from './UserForm.js';
+import Recommendations from './Recommendations.js';
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
       </header>
 
       <Switch>
+        <Route path='/recommendations'>
+          <Recommendations />
+        </Route>
         <Route path='/'>
           <UserForm />
         </Route>
