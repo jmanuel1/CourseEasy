@@ -1,13 +1,18 @@
 import { List } from 'semantic-ui-react';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import recommendCourses from './recommend.js';
 
-export default function Recommendations(/*{ courses }*/) {
-  const { prevCourses, mathSkill, serSkill, csSkill } = useParams();
-  const courses = recommendCourses(prevCourses, mathSkill, serSkill, csSkill);
+// https://reactrouter.com/web/example/query-parameters
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
+export default function Recommendations() {
+  const params = useQuery();
+  const courses = recommendCourses(params.getAll('prevCourses'), +params.get('mathSkill'), +params.get('serSkill'), +params.get('csSkill'));
   return (<List>
     {courses.map(course =>
-      <List.Item>{course.name} (session {course.session})</List.Item>
+      <List.Item key={course.code}>{course.code} (session {course.session})</List.Item>
     )}
   </List>);
 }
