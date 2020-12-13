@@ -1,0 +1,17 @@
+[
+  {
+    "Course ID": "EGR 280",
+    "Course Name": "Engineering Statistics",
+    "Course Number": "15688",
+    "Teacher": "Lewis",
+    "Course Days": "T Th",
+    "Course Start Time": "1:30 PM",
+    "Course End Time": "2:45 PM",
+    "Course Location": "Poly - AGBC154",
+    "Start/End dates": "01/11 - 04/30(C)",
+    "Course Hours": "3",
+    "Occupado": "4 of 80",
+    "IDC1": "",
+    "IDC2": "CS"
+  }
+]

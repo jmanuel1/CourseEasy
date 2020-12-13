@@ -1,0 +1,32 @@
+[
+  {
+    "Course ID": "CSE 230",
+    "Course Name": "Computer Org/Assemb Lang Prog",
+    "Course Number": "20774",
+    "Teacher": "Burger",
+    "Course Days": "T Th",
+    "Course Start Time": "12:00 PM",
+    "Course End Time": "1:15 PM",
+    "Course Location": "Poly - AGBC115",
+    "Start/End dates": "01/11 - 04/30(C)",
+    "Course Hours": "3",
+    "Occupado": "50 of 72",
+    "IDC1": "",
+    "IDC2": ""
+  },
+  {
+    "Course ID": "CSE 230",
+    "Course Name": "Computer Org/Assemb Lang Prog",
+    "Course Number": "29751",
+    "Teacher": "Vrudhula",
+    "Course Days": "T Th",
+    "Course Start Time": "9:00 AM",
+    "Course End Time": "10:15 AM",
+    "Course Location": "ASU Sync",
+    "Start/End dates": "01/11 - 04/30(C)",
+    "Course Hours": "3",
+    "Occupado": "2 of 169",
+    "IDC1": "",
+    "IDC2": ""
+  }
+]
