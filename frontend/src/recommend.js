@@ -1,7 +1,10 @@
-export default function recommendCourses(prevCourses, mathSkill, serSkill, csSkill) {
+import difficultyData from './difficulty.csv';
+import { readRemoteFile } from 'react-papaparse';
+
+export default async function recommendCourses(prevCourses, mathSkill, serSkill, csSkill) {
   const nextPossibleCourses = computeNextPossibleCourses(prevCourses);
-  const nextAvailableCourses = findNextAvailableCourses(nextPossibleCourses);
-  const minimallyDifficultCourses = minimizeDifficulty(nextAvailableCourses);
+  const nextAvailableCourses = await findNextAvailableClasses(nextPossibleCourses);
+  const minimallyDifficultCourses = await minimizeDifficulty(nextAvailableCourses, mathSkill, serSkill, csSkill);
   return minimallyDifficultCourses;
 }
 
@@ -65,14 +68,80 @@ function computeNextPossibleCourses(prevCourses) {
   return possibleCourses;
 }
 
-function findNextAvailableCourses(prevCourses) {
-  // based on Software Engineering major map and prerequisites
-  return prevCourses;
+async function findNextAvailableClasses(allowedCourses) {
+  let classes = [];
+  for (let course of allowedCourses) {
+    try {
+      const arr = (await import('../../backend/' + course.replace(' ', '_') + '_details.json'))
+        .default
+        .filter(({ Occupado }) => {
+          const [, seatsTaken, totalSeats] = Occupado.match(/(\d+) of (\d+)/);
+          return +seatsTaken < +totalSeats;
+        });
+      classes = classes.concat(arr);
+    } catch (err) {
+      // do nothing
+    }
+  }
+  // console.debug(classes);
+
+  return classes;
 }
 
-function minimizeDifficulty(courses) {
-
-  return prevCourses.map(course => ({ code: course, session: 'C' }));
+function minimizeDifficulty(courses, mathSkill, serSkill, csSkill) {
+  return new Promise(resolve => readRemoteFile(difficultyData, {
+    download: true,
+    header: true,
+    complete({ data }) {
+      // console.debug(data);
+      const cleanedData = {};
+      for (let row of data) {
+        for (let key in row) {
+          if (key.includes('Rank the courses by difficulty (see above to get an idea of what each difficulty means)')) {
+            // console.debug(key);
+            const course = key.match(/\[\s*(\w{3} \d{3})\s*\]/)[1];
+            if (!courses.some(c => c['Course ID'] === course)) {
+              continue;
+            }
+            if (!cleanedData[course]) {
+              cleanedData[course] = { totalRating: 0, ratingCount: 0 };
+            }
+            if (row[key].includes('Difficulty lvl')) {
+              cleanedData[course].totalRating += +row[key].slice(-1);
+              cleanedData[course].ratingCount++;
+            }
+          }
+          // TODO: session suggestions
+        }
+      }
+      const arrayData = [];
+      for (let course in cleanedData) {
+        if (cleanedData[course].ratingCount === 0) {
+          cleanedData[course].averageRating = 3;
+        } else {
+          cleanedData[course].averageRating = cleanedData[course].totalRating/cleanedData[course].ratingCount;
+          switch (course.slice(0, 3)) {
+            case 'MAT':
+              cleanedData[course].adjustedRating = cleanedData[course].averageRating * (1 - (mathSkill - 3)/5);
+              break;
+            case 'SER':
+              cleanedData[course].adjustedRating = cleanedData[course].averageRating * (1 - (serSkill - 3)/5);
+              break;
+            case 'CSE':
+              cleanedData[course].adjustedRating = cleanedData[course].averageRating * (1 - (csSkill - 3)/5);
+              break;
+            default:
+              cleanedData[course].adjustedRating = cleanedData[course].averageRating;
+          }
+        }
+        arrayData.push({ ...cleanedData[course], course });
+      }
+      arrayData.sort((a, b) => a.averageRating - b.averageRating);
+      // FIXME: Suggest up to 15 credits
+      const suggestions = arrayData.slice(0, 5);
+      resolve(suggestions.map(({ course }) => ({ code: course, session: 'C' })));
+    }
+  }));
 }
 
 function areRequirementsSatified(requirementSet, prevCourses) {
