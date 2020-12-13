@@ -1,0 +1,10 @@
+MAT 265,Calculus for Engineers I,10500,Staff,M W F,8:00 AM,8:50 AM,Tempe - BAC215,01/11 - 04/30(C),3,63 of 99,,MA,Add
+MAT 265,Calculus for Engineers I,14263,Fulman,M W F,10:10 AM,11:00 AM,Tempe - ART220,01/11 - 04/30(C),3,42 of 100,,MA,Add
+MAT 265,Calculus for Engineers I,14590,Fulman,T Th,6:00 PM,7:15 PM,Tempe - COORL1-74,01/11 - 04/30(C),3,85 of 110,,MA,Add
+MAT 265,Calculus for Engineers I,14854,Park,M W F,2:30 PM,3:20 PM,Tempe - BYAC240,01/11 - 04/30(C),3,17 of 40,,MA,Add
+MAT 265,Calculus for Engineers I,15092,Ruedemann,,12:00 AM,12:00 AM,iCourse,01/11 - 03/02(A),3,50 of 100,,MA,Add
+MAT 265,Calculus for Engineers I,15919,Park,M W F,11:15 AM,12:05 PM,Tempe - CDN62,01/11 - 04/30(C),3,2 of 36,,MA,Add
+MAT 265,Calculus for Engineers I,17578,Staff,M W F,12:20 PM,1:10 PM,ASU Sync,01/11 - 04/30(C),3,1 of 99,,MA,Add
+MAT 265,Calculus for Engineers I,23082,Isom,T Th,10:30 AM,11:45 AM,Poly - SANCA133,01/11 - 04/30(C),3,6 of 40,,MA,Add
+MAT 265,Calculus for Engineers I,27188,Serhan,M W,3:00 PM,4:15 PM,Poly - SANTN130,01/11 - 04/30(C),3,28 of 42,Syllabus,MA,Add
+MAT 265,Calculus for Engineers I,31729,Sharma,M W,1:30 PM,2:45 PM,Poly - SANTN130,01/11 - 04/30(C),3,37 of 42,,MA,Add

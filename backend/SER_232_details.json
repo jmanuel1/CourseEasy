@@ -1,0 +1,17 @@
+[
+  {
+    "Course ID": "SER 232",
+    "Course Name": "Computer Systems Fundamentals (LEL)",
+    "Course Number": "20035",
+    "Teacher": "Heinrichs",
+    "Course Days": "T Th",
+    "Course Start Time": "12:00 PM",
+    "Course End Time": "1:15 PM",
+    "Course Location": "Poly - SANTN339",
+    "Start/End dates": "01/11 - 04/30(C)",
+    "Course Hours": "3",
+    "Occupado": "21 of 51",
+    "IDC1": "Syllabus",
+    "IDC2": "CS"
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "Course ID": "MAT 243",
+    "Course Name": "Discrete Math Structures",
+    "Course Number": "10321",
+    "Teacher": "Kim",
+    "Course Days": "T Th",
+    "Course Start Time": "7:30 AM",
+    "Course End Time": "8:45 AM",
+    "Course Location": "Tempe - COOR184",
+    "Start/End dates": "01/11 - 04/30(C)",
+    "Course Hours": "3",
+    "Occupado": "49 of 70",
+    "IDC1": "",
+    "IDC2": ""
+  },
+  {
+    "Course ID": "MAT 243",
+    "Course Name": "Discrete Math Structures",
+    "Course Number": "20007",
+    "Teacher": "Oakes",
+    "Course Days": "T Th",
+    "Course Start Time": "1:30 PM",
+    "Course End Time": "2:45 PM",
+    "Course Location": "Poly - PRLTA145",
+    "Start/End dates": "01/11 - 04/30(C)",
+    "Course Hours": "3",
+    "Occupado": "21 of 58",
+    "IDC1": "",
+    "IDC2": ""
+  },
+  {
+    "Course ID": "MAT 243",
+    "Course Name": "Discrete Math Structures",
+    "Course Number": "22115",
+    "Teacher": "Lytvak",
+    "Course Days": "M W F",
+    "Course Start Time": "2:30 PM",
+    "Course End Time": "3:20 PM",
+    "Course Location": "Tempe - PABLO105",
+    "Start/End dates": "01/11 - 04/30(C)",
+    "Course Hours": "3",
+    "Occupado": "7 of 47",
+    "IDC1": "",
+    "IDC2": ""
+  },
+  {
+    "Course ID": "MAT 243",
+    "Course Name": "Discrete Math Structures",
+    "Course Number": "32622",
+    "Teacher": "Wang",
+    "Course Days": "",
+    "Course Start Time": "",
+    "Course End Time": "",
+    "Course Location": "iCourse",
+    "Start/End dates": "01/11 - 04/30(C)",
+    "Course Hours": "3",
+    "Occupado": "5 of 60",
+    "IDC1": "",
+    "IDC2": ""
+  }
+]
