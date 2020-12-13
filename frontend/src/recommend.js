@@ -1,5 +1,6 @@
 import difficultyData from './difficulty.csv';
 import { readRemoteFile } from 'react-papaparse';
+// import './processSurvey.js';
 
 export default async function recommendCourses(prevCourses, mathSkill, serSkill, csSkill) {
   const nextPossibleCourses = computeNextPossibleCourses(prevCourses);

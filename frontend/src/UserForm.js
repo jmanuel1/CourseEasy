@@ -1,6 +1,7 @@
 import { Input, Dropdown, Button, Container, Form } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import Slider from './Slider.js';
 
 export default function UserForm() {
   const options = [
@@ -72,9 +73,10 @@ export default function UserForm() {
       <Form>
         <Form.Input required label='Name' id='name' placeholder='Your name...' onChange={onNameChange}/>
         <Form.Dropdown required label="Course you've taken" id='courses' placeholder='Courses...' fluid multiple selection options={options} onChange={onCoursesChange} />
-        <Form.Input required label='How comfortable are you with math?' type='range' min={1} max={5} name='math-skill' id='math-skill' onChange={onSkillChange}/>
-        <Form.Input required label='How comfortable are you with software engineering?' type='range' min={1} max={5} name='ser-skill' id='ser-skill' onChange={onSkillChange}/>
-        <Form.Input required label='How comfortable are you with computer science?' type='range' min={1} max={5} name='cs-skill' id='cs-skill' onChange={onSkillChange}/>
+        {/* Slider is an <Input type='range'> with ticks and numbering below it */}
+        <Slider onChange={onSkillChange} label='How comfortable are you with math?' name='math-skill'/>
+        <Slider label='How comfortable are you with software engineering?' name='ser-skill' onChange={onSkillChange}/>
+        <Slider label='How comfortable are you with computer science?' name='cs-skill' onChange={onSkillChange}/>
         <Form.Button disabled={state.userName.length === 0}><Link to={`/recommendations?${recommendationParams.toString()}`}>Get recommended courses</Link></Form.Button>
         <Form.Button><Link to='/recommendations?saved=true'>Load saved recommendations</Link></Form.Button>
       </Form>
