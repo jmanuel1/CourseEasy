@@ -40,6 +40,7 @@ export default function Recommendations() {
   });
   const [courses, setCourses] = useState(null);
   let recommendationList;
+  console.log(courses);
 
 
   if (courses === null) {
@@ -52,6 +53,7 @@ export default function Recommendations() {
     if (saved) {
       userName = loadUserName();
     }
+
     recommendationList = (
       <>
         <Item.Group divided>
@@ -60,7 +62,7 @@ export default function Recommendations() {
               <Item.Content>
                 <Item.Header>{course.code}</Item.Header>
                 <Item.Meta>
-                  Session {course.session}
+                  expected course difficulty : {course.adjustedRating||3}/5
                 </Item.Meta>
               </Item.Content>
             </Item>
@@ -72,7 +74,7 @@ export default function Recommendations() {
   }
   return (
     <Container text textAlign='center' as='main'>
-      <Header as='h2'>{userName}, here are your recommended courses</Header>
+      <Header as='h2'>{userName}, here are your recommended courses for the semester</Header>
       {recommendationList}
     </Container>
   );
