@@ -152,7 +152,7 @@ function minimizeDifficulty(courses, mathSkill, serSkill, csSkill) {
       arrayData.sort((a, b) => a.adjustedRating - b.adjustedRating);
       // FIXME: Suggest up to 15 credits
       const suggestions = arrayData.slice(0, 5);
-      resolve(suggestions.map(({ course }) => ({ code: course, session: 'C' })));
+      resolve(suggestions.map(({ adjustedRating, course }) => ({ code: course, session: 'C', adjustedRating })));
     }
   }));
 }

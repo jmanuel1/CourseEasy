@@ -62,6 +62,7 @@ export default function Recommendations() {
     if (saved) {
       userName = loadUserName();
     }
+
     recommendationList = (
       <>
         <Item.Group divided>
@@ -70,7 +71,7 @@ export default function Recommendations() {
               <Item.Content>
                 <Item.Header>{course.code}</Item.Header>
                 <Item.Meta>
-                  Session {course.session}
+                  expected course difficulty : {course.adjustedRating||3}/5
                 </Item.Meta>
               </Item.Content>
             </Item>
