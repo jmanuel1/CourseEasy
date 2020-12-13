@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.dark-mode, .dark-mode body{
+    background: #575555;
+    color: white;
+}
+
+.dark-mode .ui.form .field > label {
+    color: white;
+}
+
+.dark-mode .ui.form input[type="text"],.dark-mode .ui.form .field > .selection.dropdown {
+    background: #918c8c;
+    color: white;
+}
+
+.dark-mode .ui.header, .ui.items > .item > .content > .header, .ui.items > .item .meta{
+    color: white;
+}
