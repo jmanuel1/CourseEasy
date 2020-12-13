@@ -47,6 +47,10 @@ function computeNextPossibleCourses(prevCourses) {
   };
   const possibleCourses = [];
   for (let course in dependencies) {
+    if (isCourseTaken(course, prevCourses)) {
+      continue;
+    }
+
     let reqsSatified = true;
     for (let requirementGroup of dependencies[course]) {
       if (!areRequirementsSatified(requirementGroup, prevCourses)) {
@@ -66,11 +70,15 @@ function findNextAvailableCourses(prevCourses) {
   return prevCourses;
 }
 
-function minimizeDifficulty(prevCourses) {
-  // based on Software Engineering major map and prerequisites
+function minimizeDifficulty(courses) {
+
   return prevCourses.map(course => ({ code: course, session: 'C' }));
 }
 
 function areRequirementsSatified(requirementSet, prevCourses) {
-  return requirementSet.some(course => prevCourses.includes(course));
+  return requirementSet.some(course => isCourseTaken(course, prevCourses));
+}
+
+function isCourseTaken(course, prevCourses) {
+  return prevCourses.includes(course);
 }
