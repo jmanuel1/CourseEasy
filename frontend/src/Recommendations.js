@@ -40,7 +40,6 @@ export default function Recommendations() {
   });
   const [courses, setCourses] = useState(null);
   let recommendationList;
-  console.log(courses);
 
 
   if (courses === null) {
