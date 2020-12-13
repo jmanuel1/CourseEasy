@@ -20,7 +20,6 @@ export function loadRecommendations(courses) {
 function computeNextPossibleCourses(prevCourses) {
   // based on Software Engineering major map and prerequisites
   // https://webapp4.asu.edu/programs/t5/roadmaps/ASU00/TSSERBS/null/ALL/2020?init=false&nopassive=true
-  // TODO: Complete data
   const dependencies = {
     'ASU 101': [],
     'ENG 101': [],
@@ -36,26 +35,26 @@ function computeNextPossibleCourses(prevCourses) {
     'MAT 243': [['MAT 210', 'MAT 251', 'MAT 265', 'MAT 270']],
     'CSE 230': [['CSE 110'], ['SER 232']],
     'CSE 240': [['ACO 102', 'CSE 205']],
-    'MAT 267': [],
-    'MAT 275': [],
-    'SER 222': [],
-    'EGR 104': [],
-    'EGR 280': [],
-    'SER 216': [],
-    'MAT 343': [],
-    'SER 315': [],
-    'SER 334': [],
-    'PHY 121': [],
-    'PHY 122': [],
-    'SER 321': [],
-    'SER 316': [],
-    'SER 335': [],
-    'SER 415': [],
-    'SER 322': [],
-    'SER 416': [],
-    'SER 401': [],
-    'HST 318': [],
-    'SER 402': []
+    'MAT 267': [['MAT 266', 'MAT 271',]],
+    'MAT 275': [['MAT 266', "MAT 271"]],
+    'SER 222': [["CSE 205", "SER 200"]],
+    'EGR 104': [["ENG 102", "ENG 105", "ENG 108"]],
+    'EGR 280': [["MAT 265", "MAT 270"]],
+    'SER 216': [["SER 222"]],
+    'MAT 343': [["MAT 266", "MAT 271"]],
+    'SER 315': [["SER 222"], ["FSE 100"], ["SER 216"]],
+    'SER 334': [["CSE 230", "SER 250"], ["SER 222"]],
+    'PHY 121': [["MAT 265", "MAT 270"], ["MAT 266", "MAT 271"]],
+    'PHY 122': [["PHY 122"]],
+    'SER 321': [["SER 222"], ["SER 334"]],
+    'SER 316': [["SER 216"], ["SER 222"]],
+    'SER 335': [["SER 216"], ["SER 315"], ["SER 334"]],
+    'SER 415': [["SER 315"]],
+    'SER 322': [["SER 222"]],
+    'SER 416': [["SER 316"]],
+    'SER 401': [["SER 316"]],
+    'HST 318': [["ENG 102", "ENG 105", "ENG 108", "ENG 112"]],
+    'SER 402': [["SER 401"]]
   };
   const possibleCourses = [];
   for (let course in dependencies) {
