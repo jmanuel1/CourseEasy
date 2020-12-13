@@ -12,6 +12,8 @@ function useQuery(schema) {
       object[key] = params.getAll(key);
     } else if (schema[key] === Number) {
       object[key] = +params.get(key);
+    } else if (schema[key] === Boolean) {
+      object[key] = !!params.get(key);
     } else {
       object[key] = params.get(key);
     }
@@ -19,17 +21,37 @@ function useQuery(schema) {
   return object;
 }
 
+function saveUserName(userName) {
+  localStorage.setItem('user-name', userName);
+}
+
+function loadUserName() {
+  return localStorage.getItem('user-name');
+}
+
 export default function Recommendations() {
-  const { prevCourses, mathSkill, serSkill, csSkill } = useQuery({ prevCourses: Array, mathSkill: Number, serSkill: Number, csSkill: Number });
-  const courses = recommendCourses(prevCourses, mathSkill, serSkill, csSkill);
+  let { prevCourses, mathSkill, serSkill, csSkill, userName, saved } = useQuery({
+    prevCourses: Array,
+    mathSkill: Number,
+    serSkill: Number,
+    csSkill: Number,
+    userName: String,
+    saved: Boolean
+  });
   const [courses, setCourses] = useState(null);
   let recommendationList;
 
 
   if (courses === null) {
+    if (saved) {
+      setCourses(loadRecommendations());
+    } else
       recommendCourses(prevCourses, mathSkill, serSkill, csSkill).then(setCourses);
     recommendationList = <p>Loading class recommendations...</p>;
   } else {
+    if (saved) {
+      userName = loadUserName();
+    }
     recommendationList = (
       <>
         <Item.Group divided>
@@ -44,6 +66,7 @@ export default function Recommendations() {
             </Item>
           )}
         </Item.Group>
+        <Button onClick={() => { saveRecommendations(courses); saveUserName(userName); }}>Save recommendations in browser</Button>
       </>
     );
   }

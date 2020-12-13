@@ -8,6 +8,14 @@ export default async function recommendCourses(prevCourses, mathSkill, serSkill,
   return minimallyDifficultCourses;
 }
 
+export function saveRecommendations(courses) {
+  localStorage.setItem('recommended-courses', JSON.stringify(courses));
+}
+
+export function loadRecommendations(courses) {
+  return JSON.parse(localStorage.getItem('recommended-courses'));
+}
+
 function computeNextPossibleCourses(prevCourses) {
   // based on Software Engineering major map and prerequisites
   // https://webapp4.asu.edu/programs/t5/roadmaps/ASU00/TSSERBS/null/ALL/2020?init=false&nopassive=true
@@ -72,6 +80,7 @@ async function findNextAvailableClasses(allowedCourses) {
   let classes = [];
   for (let course of allowedCourses) {
     try {
+      // FIXME: Ignore Laboratory classes
       const arr = (await import('../../backend/' + course.replace(' ', '_') + '_details.json'))
         .default
         .filter(({ Occupado }) => {
@@ -136,7 +145,7 @@ function minimizeDifficulty(courses, mathSkill, serSkill, csSkill) {
         }
         arrayData.push({ ...cleanedData[course], course });
       }
-      arrayData.sort((a, b) => a.averageRating - b.averageRating);
+      arrayData.sort((a, b) => a.adjustedRating - b.adjustedRating);
       // FIXME: Suggest up to 15 credits
       const suggestions = arrayData.slice(0, 5);
       resolve(suggestions.map(({ course }) => ({ code: course, session: 'C' })));

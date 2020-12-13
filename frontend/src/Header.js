@@ -1,13 +1,17 @@
 import { Link } from 'react-router-dom';
-import { Button, Icon, Header as Heading } from 'semantic-ui-react';
+import { Button, Icon, Header as Heading, Menu } from 'semantic-ui-react';
 
-export default function Header({ prevRoute }) {
+export default function Header({ prevRoute, noBack = false }) {
   return (
     <header>
-      <Button icon>
-        <Link to={prevRoute}><Icon name='arrow left' /> Back</Link>
-      </Button>
-      <Heading as='h1' id='title'>CourseEasy</Heading>
+      <Menu fixed='top' inverted>
+        <Menu.Item>
+          <Button icon disabled={noBack} inverted>
+            <Link to={prevRoute} className='inverted'><Icon name='arrow left' inverted/> Back</Link>
+          </Button>
+        </Menu.Item>
+        <Menu.Item id='title'><Heading as='h1' inverted>CourseEasy</Heading></Menu.Item>
+      </Menu>
     </header>
   );
 }

@@ -19,7 +19,7 @@ function App() {
           <Recommendations />
         </Route>
         <Route path='/'>
-          <Header prevRoute='/' />
+          <Header noBack />
           <UserForm />
         </Route>
       </Switch>

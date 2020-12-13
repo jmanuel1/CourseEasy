@@ -1,8 +1,16 @@
-header {
+/* header {
   display: flex;
   align-items: center;
 }
 
 #title {
   margin-top: 0;
+} */
+
+.menu a.inverted {
+  color: inherit;
+}
+
+main {
+  margin-top: 7em;
 }

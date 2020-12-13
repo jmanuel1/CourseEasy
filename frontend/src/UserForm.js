@@ -1,4 +1,4 @@
-import { Input, Dropdown, Button } from 'semantic-ui-react';
+import { Input, Dropdown, Button, Container, Form } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -40,7 +40,7 @@ export default function UserForm() {
     { key: 'SER 402', text: 'SER 402', value: 'SER 402' }
   ];
 
-  const [state, setState] = useState({ prevCourses: [], mathSkill: 3, serSkill: 3, csSkill: 3});
+  const [state, setState] = useState({ prevCourses: [], mathSkill: 3, serSkill: 3, csSkill: 3, userName: '' });
   function onCoursesChange(event, data) {
     setState({ ...state, prevCourses: data.value });
   }
@@ -52,25 +52,32 @@ export default function UserForm() {
     };
     setState({ ...state, [stateProperties[data.name]]: data.value });
   }
+  function onNameChange(event, data) {
+    setState({ ...state, userName: data.value });
+  }
 
   const recommendationParams = new URLSearchParams();
   // console.debug(state.prevCourses);
   for (let course of state.prevCourses) {
     recommendationParams.append('prevCourses', course);
   }
-  for (let skill of ['mathSkill', 'serSkill', 'csSkill']) {
-    recommendationParams.append(skill, state[skill]);
+  for (let param of ['mathSkill', 'serSkill', 'csSkill', 'userName']) {
+    recommendationParams.append(param, state[param]);
   }
 
-  return (<>
-    <Input placeholder='Your name...' />
-    <Dropdown placeholder='Courses...' fluid multiple selection options={options} onChange={onCoursesChange} />
-    <Input type='range' min={1} max={5} name='math-skill' onChange={onSkillChange}/>
-    <label htmlFor='math-skill'>Math</label>
-    <Input type='range' min={1} max={5} name='ser-skill'  onChange={onSkillChange}/>
-    <label htmlFor='ser-skill'>SER</label>
-    <Input type='range' min={1} max={5} name='cs-skill'  onChange={onSkillChange}/>
-    <label htmlFor='cs-skill'>CS</label>
-    <Button><Link to={`/recommendations?${recommendationParams.toString()}`}>Get recommended courses</Link></Button>
-  </>);
+  {/* TODO: (nice to have) recover previous form state */}
+
+  return (
+    <Container text as='main'>
+      <Form>
+        <Form.Input required label='Name' id='name' placeholder='Your name...' onChange={onNameChange}/>
+        <Form.Dropdown required label="Course you've taken" id='courses' placeholder='Courses...' fluid multiple selection options={options} onChange={onCoursesChange} />
+        <Form.Input required label='How comfortable are you with math?' type='range' min={1} max={5} name='math-skill' id='math-skill' onChange={onSkillChange}/>
+        <Form.Input required label='How comfortable are you with software engineering?' type='range' min={1} max={5} name='ser-skill' id='ser-skill' onChange={onSkillChange}/>
+        <Form.Input required label='How comfortable are you with computer science?' type='range' min={1} max={5} name='cs-skill' id='cs-skill' onChange={onSkillChange}/>
+        <Form.Button disabled={state.userName.length === 0}><Link to={`/recommendations?${recommendationParams.toString()}`}>Get recommended courses</Link></Form.Button>
+        <Form.Button><Link to='/recommendations?saved=true'>Load saved recommendations</Link></Form.Button>
+      </Form>
+    </Container>
+  );
 }
