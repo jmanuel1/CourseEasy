@@ -14,7 +14,11 @@ export function saveRecommendations(courses) {
 }
 
 export function loadRecommendations(courses) {
-  return JSON.parse(localStorage.getItem('recommended-courses'));
+  const recommendations = JSON.parse(localStorage.getItem('recommended-courses'));
+  if (!recommendations) {
+    return null;
+  }
+  return recommendations
 }
 
 function computeNextPossibleCourses(prevCourses) {

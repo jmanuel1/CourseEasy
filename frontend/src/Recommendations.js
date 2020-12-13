@@ -41,13 +41,23 @@ export default function Recommendations() {
   const [courses, setCourses] = useState(null);
   let recommendationList;
 
+  let success = true;
 
   if (courses === null) {
     if (saved) {
-      setCourses(loadRecommendations());
-    } else
+      const savedCourses = loadRecommendations();
+      if (!savedCourses) {
+        recommendationList = <p>No saved class recommendations!</p>;
+        success = false;
+      } else {
+        setCourses(savedCourses);
+      }
+    } else {
       recommendCourses(prevCourses, mathSkill, serSkill, csSkill).then(setCourses);
-    recommendationList = <p>Loading class recommendations...</p>;
+    }
+    if (success) {
+      recommendationList = <p>Loading class recommendations...</p>;
+    }
   } else {
     if (saved) {
       userName = loadUserName();
@@ -72,7 +82,7 @@ export default function Recommendations() {
   }
   return (
     <Container text textAlign='center' as='main'>
-      <Header as='h2'>{userName}, here are your recommended courses</Header>
+      {success && <Header as='h2'>{userName}, here are your recommended courses for next semester</Header>}
       {recommendationList}
     </Container>
   );
